@@ -1,3 +1,6 @@
+package sh.weller.adventofcode.twentytwenty
+
+import getMultipliedForSumOfDepth
 import org.junit.jupiter.api.Test
 import util.fileToList
 import kotlin.test.assertEquals
@@ -23,7 +26,7 @@ internal class Day1Test {
 
     @Test
     fun firstPartWithRealData() {
-        val data = fileToList<Int>("Day1Data.txt")
+        val data = fileToList<Int>("2020/Day1Data.txt")
         val result = data.getMultipliedForSumOfDepth(2020, 2)
 
         println("Result: $result")
@@ -50,7 +53,7 @@ internal class Day1Test {
 
     @Test
     fun secondPartWithRealData() {
-        val data = fileToList<Int>("Day1Data.txt")
+        val data = fileToList<Int>("2020/Day1Data.txt")
         val result = data.getMultipliedForSumOfDepth(2020, 3)
 
         println("Result: $result")
