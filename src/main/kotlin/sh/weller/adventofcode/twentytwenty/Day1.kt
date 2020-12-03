@@ -1,4 +1,4 @@
-fun List<Int>.getMultipliedForSumOfDepth(sum: Int, depth: Int): Int? {
+fun List<Int>.getMultipliedForSumOfDepth(sum: Int, depth: Int): Long? {
     val explodedList = this.permutations(depth)
     explodedList.forEach {
         if (it.sum() == sum) {
@@ -8,8 +8,10 @@ fun List<Int>.getMultipliedForSumOfDepth(sum: Int, depth: Int): Int? {
     return null
 }
 
-fun List<Int>.multipliedSum(): Int =
-    this.reduce { i, j -> i * j }
+fun List<Int>.multipliedSum(): Long =
+    this
+        .map { it.toLong() }
+        .reduce { i, j -> i * j }
 
 fun List<Int>.permutations(depth: Int = 2): List<List<Int>> =
     this.preparePermutations().permutationsRec(depth)

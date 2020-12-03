@@ -1,8 +1,7 @@
 package sh.weller.adventofcode.util
 
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import util.fileToList
+import kotlin.test.assertEquals
 
 internal class FileSupportTest {
     @Test
@@ -15,7 +14,7 @@ internal class FileSupportTest {
         )
 
         val result = fileToList<Int>("util/intList.txt")
-        Assertions.assertEquals(expectedData, result)
+        assertEquals(expectedData, result)
     }
 
     @Test
@@ -28,7 +27,7 @@ internal class FileSupportTest {
         )
 
         val result = fileToList<Double>("util/doubleList.txt")
-        Assertions.assertEquals(expectedData, result)
+        assertEquals(expectedData, result)
     }
 
 
@@ -39,13 +38,24 @@ internal class FileSupportTest {
         )
 
         val result = fileToList<Int>("util/invalidList.txt")
-        Assertions.assertEquals(expectedData, result)
+        assertEquals(expectedData, result)
     }
 
     @Test
     fun notFoundList() {
         val expectedData = emptyList<Any>()
         val result = fileToList<Int>("util/foo.txt")
-        Assertions.assertEquals(expectedData, result)
+        assertEquals(expectedData, result)
+    }
+
+    @Test
+    fun fileTo2dListTest() {
+        val expectedData = listOf(
+            listOf('*', '#', '*'),
+            listOf('*', '*', '*'),
+            listOf('*', '*', '#')
+        )
+        val result = fileTo2DList("util/2dList.txt")
+        assertEquals(expectedData, result)
     }
 }
