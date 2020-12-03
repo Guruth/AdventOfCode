@@ -1,17 +1,15 @@
-fun List<Int>.getMultipliedForSumOfDepth(sum: Int, depth: Int): Long? {
+import sh.weller.adventofcode.util.multipliedSum
+
+fun List<Int>.getMultipliedForSumOfDepth(sum: Int, depth: Int): Long {
+    var result: Long = 0
     val explodedList = this.permutations(depth)
     explodedList.forEach {
         if (it.sum() == sum) {
-            return it.multipliedSum()
+            result = it.multipliedSum()
         }
     }
-    return null
+    return result
 }
-
-fun List<Int>.multipliedSum(): Long =
-    this
-        .map { it.toLong() }
-        .reduce { i, j -> i * j }
 
 fun List<Int>.permutations(depth: Int = 2): List<List<Int>> =
     this.preparePermutations().permutationsRec(depth)

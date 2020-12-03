@@ -3,6 +3,7 @@ package sh.weller.adventofcode.twentytwenty
 import getMultipliedForSumOfDepth
 import org.junit.jupiter.api.Test
 import sh.weller.adventofcode.util.fileToList
+import sh.weller.adventofcode.util.printResult
 import kotlin.test.assertEquals
 
 internal class Day1Test {
@@ -29,7 +30,7 @@ internal class Day1Test {
         val data = fileToList<Int>("2020/Day1Data.txt")
         val result = data.getMultipliedForSumOfDepth(2020, 2)
 
-        println("Result: $result")
+        printResult(1,1,result)
     }
 
 
@@ -56,7 +57,7 @@ internal class Day1Test {
         val data = fileToList<Int>("2020/Day1Data.txt")
         val result = data.getMultipliedForSumOfDepth(2020, 3)
 
-        println("Result: $result")
+        printResult(1,2,result)
     }
 
 }

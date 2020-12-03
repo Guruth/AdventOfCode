@@ -1,7 +1,6 @@
 package sh.weller.adventofcode.twentytwenty
 
-import multipliedSum
-
+import sh.weller.adventofcode.util.multipliedSum
 
 fun List<List<Char>>.countTreesWhileNavigatingForMultiple(patternList: List<List<Pair<Direction, Int>>>): Long =
     patternList
@@ -37,15 +36,10 @@ fun List<List<Char>>.countTreesWhileNavigating(pattern: List<Pair<Direction, Int
 }
 
 private fun List<List<Char>>.getCharAtPosition(x: Int, y: Int): Char? {
-    var tmpX = x
-
     if (y >= this.size) {
         return null
     }
-    while (tmpX >= this[0].size) {
-        tmpX -= this[0].size
-    }
-    return this[y][tmpX]
+    return this[y][x % this[0].size]
 }
 
 
