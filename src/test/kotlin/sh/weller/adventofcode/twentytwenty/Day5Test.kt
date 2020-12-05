@@ -44,6 +44,3 @@ class Day5Test {
     }
 }
 
-// 7 Chars row 3 Chars Column
-
-val rows = 128
