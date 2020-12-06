@@ -6,8 +6,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Day4Test {
-    val testData = fileToList<String>("2020/Day4TestData.txt")
-    val realData = fileToList<String>("2020/Day4Data.txt")
+    private val testData = fileToList<String>("2020/Day4TestData.txt")
+    private val realData = fileToList<String>("2020/Day4Data.txt")
 
     @Test
     fun partOneTest() {
@@ -32,26 +32,17 @@ class Day4Test {
         val result = realData.validatePassportsPartTwo(expectedFieldKeys)
         printResult(4, 2, result)
     }
+
+    private val expectedFieldKeys = listOf(
+        "byr",
+        "iyr",
+        "eyr",
+        "hgt",
+        "hcl",
+        "ecl",
+        "pid",
+//    "cid"
+    )
+
 }
 
-val expectedFields = listOf(
-    "byr (Birth Year)",
-    "iyr (Issue Year)",
-    "eyr (Expiration Year)",
-    "hgt (Height)",
-    "hcl (Hair Color)",
-    "ecl (Eye Color)",
-    "pid (Passport ID)",
-    "cid (Country ID)"
-)
-
-val expectedFieldKeys = listOf(
-    "byr",
-    "iyr",
-    "eyr",
-    "hgt",
-    "hcl",
-    "ecl",
-    "pid",
-//    "cid"
-)
