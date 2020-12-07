@@ -25,14 +25,17 @@ class Day7Test {
 
     @Test
     fun partTwoTest() {
-        val result = testData2.countBagsThatareContained("shiny gold")
+        var result = testData.countBagsThatAreContained("shiny gold")
+        assertEquals(32, result)
+
+         result = testData2.countBagsThatAreContained("shiny gold")
         assertEquals(126, result)
     }
 
     @Test
     fun partTwoReal() {
-//        val result = realData.
-//        printResult(day, 2, result)
+        val result = realData.countBagsThatAreContained("shiny gold")
+        printResult(day, 2, result)
     }
 }
 
