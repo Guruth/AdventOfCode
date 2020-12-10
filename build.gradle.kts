@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.4.20"
-    application
 }
 
 group = "sh.weller"
@@ -13,6 +12,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jgrapht:jgrapht-core:1.5.0")
+
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
@@ -24,8 +25,4 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "11"
-}
-
-application {
-    mainClassName = "MainKt"
 }

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import sh.weller.adventofcode.util.fileToList
 import sh.weller.adventofcode.util.printResult
 import kotlin.test.Test
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTime
 
 class Day10Test {
     private val day = 10
@@ -25,7 +27,7 @@ class Day10Test {
 
     @Test
     fun partTwoTest() {
-        var result = listOf(1, 2, 3, 4).findPossibleVariations()
+        var result = listOf(1, 2, 3, 4).findPathsSmart()
         assertEquals(7, result)
         // adapters     [0, 1, 2, 3, 4, 7]
         // leafCounter  [1, 1, 2, 4, 7, 7]
@@ -36,17 +38,56 @@ class Day10Test {
         // 4:       4 - [1, 2, 3] =>  3 Edges => Push 1 + 2 + 4
         // 5:       7 - [2, 3, 4] =>  1 Edge  => Push 7
 
-        result = testData.findPossibleVariations()
+        result = testData.findPathsSmart()
         assertEquals(8, result)
 
-        result = testData2.findPossibleVariations()
+        result = testData2.findPathsSmart()
+        assertEquals(19208, result)
+
+        // One Graph
+        result = listOf(1, 2, 3, 4).findPathsInGraph().toLong()
+        assertEquals(7, result)
+
+        result = testData.findPathsInGraph().toLong()
+        assertEquals(8, result)
+
+        result = testData2.findPathsInGraph().toLong()
+        assertEquals(19208, result)
+
+        // Split Graphs
+        result = listOf(1, 2, 3, 4).findPathsInSplitGraph()
+        assertEquals(7, result)
+
+        result = testData.findPathsInSplitGraph()
+        assertEquals(8, result)
+
+        result = testData2.findPathsInSplitGraph()
         assertEquals(19208, result)
     }
 
     @Test
     fun partTwoReal() {
-        val result = realData.findPossibleVariations()
+        val result = realData.findPathsSmart()
         printResult(day, 2, result)
+    }
+
+
+    @ExperimentalTime
+    @Test
+    fun partTwoTimeMeasure() {
+        val expectedResult = 3543369523456L
+
+        var elapsedTime = measureTime {
+            assertEquals(expectedResult, realData.findPathsSmart())
+        }
+        println("Smart takes $elapsedTime")
+
+
+        elapsedTime = measureTime {
+            assertEquals(expectedResult, realData.findPathsInSplitGraph())
+        }
+        println("Split Graph takes $elapsedTime")
+
     }
 }
 
