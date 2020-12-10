@@ -7,7 +7,7 @@ fun List<Int>.findPossibleVariations_bruteforce(): Int {
 }
 
 
-fun List<Int>.rec(): List<Int> {
+private fun List<Int>.rec(): List<Int> {
     if (this.size == 1) {
         return this
     }
