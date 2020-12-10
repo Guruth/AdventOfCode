@@ -53,7 +53,7 @@ fun List<String>.debugInstructions(): Pair<Int, Int> {
     return Pair(stackPointer, acc)
 }
 
-fun List<String>.executeInstructions(): Int {
+ fun List<String>.executeInstructions(): Int {
     val instructionCounter = mutableListOf<Int>()
     var acc = 0
     var stackPointer = 0
@@ -91,8 +91,8 @@ fun List<String>.executeInstructions(): Int {
 }
 
 
-fun List<String>.getInstructionAt(position: Int): Pair<String, String> =
+private fun List<String>.getInstructionAt(position: Int): Pair<String, String> =
     this[position].parseInstruction()
 
-fun String.parseInstruction(): Pair<String, String> =
+private fun String.parseInstruction(): Pair<String, String> =
     this.split(" ").let { Pair(it[0], it[1]) }
