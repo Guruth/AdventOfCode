@@ -51,9 +51,9 @@ private fun List<Int>.findPathsInSubGraph(): Int {
     return allDirectedPaths.getAllPaths(this.first(), this.last(), true, Int.MAX_VALUE).count()
 }
 
-fun List<Int>.findPathsBruteForce(): Int {
+fun List<Int>.findPathsBruteForce(): Long {
     val sorted = (listOf(0) + this.sorted() + listOf(this.maxOf { it } + 3))
-    return sorted.rec().size
+    return sorted.rec().size.toLong()
 }
 
 private fun List<Int>.rec(): List<Int> {
@@ -83,7 +83,6 @@ fun List<Int>.findPathsSmart(): Long {
     return depthList.last()
 }
 
-
 fun List<Int>.countJoltDifferences(startJoltage: Int = 0): Long {
     var currentJoltage = startJoltage
     var oneDifference: Long = 0
@@ -93,12 +92,8 @@ fun List<Int>.countJoltDifferences(startJoltage: Int = 0): Long {
         val difference = value - currentJoltage
         if (difference >= 1 || difference <= 3) {
             when (difference) {
-                1 -> {
-                    oneDifference++
-                }
-                3 -> {
-                    threeDifference++
-                }
+                1 -> oneDifference++
+                3 -> threeDifference++
             }
             currentJoltage += difference
         }
