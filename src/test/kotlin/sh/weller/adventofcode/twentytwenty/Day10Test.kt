@@ -90,14 +90,12 @@ class Day10Test {
         var elapsedTime = measureTime {
             assertEquals(expectedResult, realData.findPathsSmart())
         }
-        println("Smart takes $elapsedTime")
-
+        println("Smart takes $elapsedTime") // 7.14ms
 
         elapsedTime = measureTime {
             assertEquals(expectedResult, realData.findPathsInSplitGraph())
         }
-        println("Split Graph takes $elapsedTime")
-
+        println("Split Graph takes $elapsedTime") // 21.6ms
     }
 }
 
