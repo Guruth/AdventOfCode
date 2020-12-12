@@ -4,114 +4,101 @@ import kotlin.math.absoluteValue
 
 
 fun List<String>.day12Part2(): Int {
-    var xShipPosition = 0
-    var yShipPosition = 0
-
-    var xWaypointPosition = 10
-    var yWaypointPosition = 1
+    var shipCoordinates = Coordinates(0, 0)
+    var waypointCoordinates = Coordinates(10, 1)
 
     this.map { it.toInstruction() }
-        .forEach {
-            when (it.first) {
-                'E' -> xWaypointPosition += it.second
-                'S' -> yWaypointPosition -= it.second
-                'W' -> xWaypointPosition -= it.second
-                'N' -> yWaypointPosition += it.second
-                'L', 'R' -> {
-                    val result = (xWaypointPosition to yWaypointPosition).part2Rotate(it)
-                    xWaypointPosition = result.first
-                    yWaypointPosition = result.second
-                }
-                'F' -> {
-                    xShipPosition += (xWaypointPosition * it.second)
-                    yShipPosition += (yWaypointPosition * it.second)
-                }
+        .forEach { instruction ->
+            when (instruction.getOperation()) {
+                'E' -> waypointCoordinates = waypointCoordinates.addX(instruction.getValue())
+                'S' -> waypointCoordinates = waypointCoordinates.subtractY(instruction.getValue())
+                'W' -> waypointCoordinates = waypointCoordinates.subtractX(instruction.getValue())
+                'N' -> waypointCoordinates = waypointCoordinates.addY(instruction.getValue())
+                'L', 'R' -> waypointCoordinates = waypointCoordinates.part2Rotate(instruction)
+                'F' -> shipCoordinates = shipCoordinates.moveInDirection(waypointCoordinates, instruction.getValue())
             }
         }
 
-    return xShipPosition.absoluteValue + yShipPosition.absoluteValue
+    return shipCoordinates.getX().absoluteValue + shipCoordinates.getY().absoluteValue
 }
 
-fun Pair<Int, Int>.part2Rotate(instruction: Pair<Char, Int>): Pair<Int, Int> =
+private fun Coordinates.part2Rotate(instruction: Instruction): Coordinates =
     when ("${instruction.first}${instruction.second}") {
-        "L90", "R270" -> Pair(-second, first)
-        "L180", "R180" -> Pair(-first, -second)
-        "R90", "L270" -> Pair(second, -first)
+        "L90", "R270" -> Coordinates(-second, first)
+        "L180", "R180" -> Coordinates(-first, -second)
+        "R90", "L270" -> Coordinates(second, -first)
         else -> {
-            throw IllegalArgumentException("${instruction.first}${instruction.second} not known")
+            throw IllegalArgumentException()
         }
     }
 
+private fun Coordinates.moveInDirection(coordinates: Coordinates, multiplier: Int): Coordinates =
+    this.copy(this.getX() + (coordinates.getX() * multiplier), this.getY() + (coordinates.getY() * multiplier))
+
 
 fun List<String>.day12Part1(): Int {
+    var shipCoordinates = Coordinates(0, 0)
     var direction = 'E'
-    var xPosition = 0
-    var yPosition = 0
 
     this.map { it.toInstruction() }
-        .forEach {
-//            println("Next Instruction: $it")
-            when (it.first) {
-                'E' -> xPosition += it.second
-                'S' -> yPosition -= it.second
-                'W' -> xPosition -= it.second
-                'N' -> yPosition += it.second
-
-                'L' -> when (it.second) {
-                    90 -> when (direction) {
-                        'E' -> direction = 'N'
-                        'S' -> direction = 'E'
-                        'W' -> direction = 'S'
-                        'N' -> direction = 'W'
-                    }
-                    180 -> when (direction) {
-                        'E' -> direction = 'W'
-                        'S' -> direction = 'N'
-                        'W' -> direction = 'E'
-                        'N' -> direction = 'S'
-                    }
-                    270 -> when (direction) {
-                        'E' -> direction = 'S'
-                        'S' -> direction = 'W'
-                        'W' -> direction = 'N'
-                        'N' -> direction = 'E'
-                    }
-                }
-
-                'R' -> when (it.second) {
-                    90 -> when (direction) {
-
-                        'E' -> direction = 'S'
-                        'S' -> direction = 'W'
-                        'W' -> direction = 'N'
-                        'N' -> direction = 'E'
-                    }
-                    180 -> when (direction) {
-                        'E' -> direction = 'W'
-                        'S' -> direction = 'N'
-                        'W' -> direction = 'E'
-                        'N' -> direction = 'S'
-                    }
-                    270 -> when (direction) {
-                        'E' -> direction = 'N'
-                        'S' -> direction = 'E'
-                        'W' -> direction = 'S'
-                        'N' -> direction = 'W'
-                    }
-                }
+        .forEach { instruction ->
+            when (instruction.getOperation()) {
+                'E' -> shipCoordinates = shipCoordinates.addX(instruction.getValue())
+                'S' -> shipCoordinates = shipCoordinates.subtractY(instruction.getValue())
+                'W' -> shipCoordinates = shipCoordinates.subtractX(instruction.getValue())
+                'N' -> shipCoordinates = shipCoordinates.addY(instruction.getValue())
+                'L', 'R' -> direction = direction.rotate(instruction)
                 'F' -> {
                     when (direction) {
-                        'E' -> xPosition += it.second
-                        'S' -> yPosition -= it.second
-                        'W' -> xPosition -= it.second
-                        'N' -> yPosition += it.second
+                        'E' -> shipCoordinates = shipCoordinates.addX(instruction.getValue())
+                        'S' -> shipCoordinates = shipCoordinates.subtractY(instruction.getValue())
+                        'W' -> shipCoordinates = shipCoordinates.subtractX(instruction.getValue())
+                        'N' -> shipCoordinates = shipCoordinates.addY(instruction.getValue())
                     }
                 }
             }
         }
-
-    return xPosition.absoluteValue + yPosition.absoluteValue
+    return shipCoordinates.getX().absoluteValue + shipCoordinates.getY().absoluteValue
 }
 
+private fun Char.rotate(instruction: Instruction): Char =
+    when ("${instruction.getOperation()}${instruction.getValue()}") {
+        "L90", "R270" -> when (this) {
+            'E' -> 'N'
+            'S' -> 'E'
+            'W' -> 'S'
+            'N' -> 'W'
+            else -> throw IllegalArgumentException()
+        }
+        "L180", "R180" -> when (this) {
+            'E' -> 'W'
+            'S' -> 'N'
+            'W' -> 'E'
+            'N' -> 'S'
+            else -> throw IllegalArgumentException()
+        }
+        "R90", "L270" -> when (this) {
+            'E' -> 'S'
+            'S' -> 'W'
+            'W' -> 'N'
+            'N' -> 'E'
+            else -> throw IllegalArgumentException()
+        }
+        else -> throw IllegalArgumentException()
+    }
 
-private fun String.toInstruction(): Pair<Char, Int> = Pair(this[0], this.drop(1).toInt())
+
+private typealias Coordinates = Pair<Int, Int>
+
+private fun Coordinates.addX(value: Int): Coordinates = this.copy(first = this.first + value)
+private fun Coordinates.subtractX(value: Int): Coordinates = this.copy(first = this.first - value)
+private fun Coordinates.addY(value: Int): Coordinates = this.copy(second = this.second + value)
+private fun Coordinates.subtractY(value: Int): Coordinates = this.copy(second = this.second - value)
+private fun Coordinates.getX() = this.first
+private fun Coordinates.getY() = this.second
+
+private typealias Instruction = Pair<Char, Int>
+
+private fun String.toInstruction(): Instruction = Instruction(this[0], this.drop(1).toInt())
+private fun Instruction.getOperation() = this.first
+private fun Instruction.getValue() = this.second
