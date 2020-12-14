@@ -48,7 +48,7 @@ fun List<String>.day14Part2(): Long {
     return memory.values.sum()
 }
 
-fun Int.getBinaryCombinations(): List<List<Char>> {
+private fun Int.getBinaryCombinations(): List<List<Char>> {
     val combinations = mutableListOf<List<Char>>()
     val numCombinations = (2.0).pow(this).toInt()
 
