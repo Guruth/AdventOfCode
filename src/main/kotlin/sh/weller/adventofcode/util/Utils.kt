@@ -17,7 +17,6 @@ fun printResult(day: Int, part: Int, result: Any) {
 fun <T> List<T>.copy(): List<T> =
     this.toList()
 
-
 @JvmName("copyListDepth2")
 fun <T> List<List<T>>.copy(): List<List<T>> =
     this.map { it.copy() }

@@ -6,6 +6,7 @@ import kotlin.test.Test
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
+@ExperimentalTime
 class Day15Test {
     private val day = 15
 
@@ -64,7 +65,6 @@ class Day15Test {
         assertEquals(362, result)
     }
 
-    @OptIn(ExperimentalTime::class)
     @Test
     fun partTwoReal() {
         val elapsedTime = measureTime {
