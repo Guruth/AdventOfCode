@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     implementation("org.jgrapht:jgrapht-core:1.5.0")
+    implementation("org.magicwerk:brownies-collections:0.9.14")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
