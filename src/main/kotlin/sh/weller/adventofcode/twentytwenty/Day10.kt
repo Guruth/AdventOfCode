@@ -4,7 +4,7 @@ import org.jgrapht.Graph
 import org.jgrapht.alg.shortestpath.AllDirectedPaths
 import org.jgrapht.graph.DefaultDirectedGraph
 import org.jgrapht.graph.DefaultEdge
-import sh.weller.adventofcode.util.multipliedSumLong
+import sh.weller.adventofcode.util.product
 
 
 fun List<Int>.findPathsInGraph(): Int {
@@ -36,7 +36,7 @@ fun List<Int>.findPathsInSplitGraph(): Long {
     }
 
     val subGraphResults = subGraphList.map { it.findPathsInSubGraph().toLong() }
-    return subGraphResults.multipliedSumLong()
+    return subGraphResults.product()
 }
 
 private fun List<Int>.findPathsInSubGraph(): Int {
