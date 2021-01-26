@@ -5,8 +5,9 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.milliseconds
 
 
+@ExperimentalTime
 fun List<Int>.day23Part2(rounds: Int = 10000000): Long {
-    val cups = playCrabCups(rounds, (this + ((this.maxOf { it }+1) .. 1000000)))
+    val cups = playCrabCups(rounds, (this + ((this.maxOf { it } + 1)..1000000)))
 
     val oneIndex = cups.indexOf(1)
     val cupAfterOne = cups[oneIndex + 1]
@@ -15,6 +16,7 @@ fun List<Int>.day23Part2(rounds: Int = 10000000): Long {
     return cupAfterOne.toLong() * cupTwoAfterOne.toLong()
 }
 
+@ExperimentalTime
 fun List<Int>.day23Part1(rounds: Int = 100): String {
     val cups = playCrabCups(rounds, this)
 
@@ -25,7 +27,7 @@ fun List<Int>.day23Part1(rounds: Int = 100): String {
 }
 
 
-@OptIn(ExperimentalTime::class)
+@ExperimentalTime
 private fun playCrabCups(rounds: Int, cupsList: List<Int>): List<Int> {
     val cups = IntGapList.create(cupsList)
 

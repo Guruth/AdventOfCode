@@ -1,13 +1,13 @@
 package sh.weller.adventofcode.twentytwenty
 
-import sh.weller.adventofcode.util.multipliedSum
+import sh.weller.adventofcode.util.product
 
 fun List<List<Char>>.countTreesWhileNavigatingForMultiple(patternList: List<List<Pair<Direction, Int>>>): Long =
     patternList
         .map {
             this.countTreesWhileNavigating(it)
         }
-        .multipliedSum()
+        .product()
 
 
 fun List<List<Char>>.countTreesWhileNavigating(pattern: List<Pair<Direction, Int>>): Int {

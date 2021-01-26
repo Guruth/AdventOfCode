@@ -1,11 +1,11 @@
-import sh.weller.adventofcode.util.multipliedSum
+import sh.weller.adventofcode.util.product
 
 fun List<Int>.getMultipliedForSumOfDepth(sum: Int, depth: Int): Long {
     var result: Long = 0
     val explodedList = this.permutations(depth)
     explodedList.forEach {
         if (it.sum() == sum) {
-            result = it.multipliedSum()
+            result = it.product()
         }
     }
     return result

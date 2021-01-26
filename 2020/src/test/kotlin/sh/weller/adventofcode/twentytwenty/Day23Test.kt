@@ -3,7 +3,9 @@ package sh.weller.adventofcode.twentytwenty
 import sh.weller.adventofcode.util.printResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class Day23Test {
     private val day = 23
 
