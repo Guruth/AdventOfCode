@@ -8,7 +8,7 @@ pub fn run() {
 }
 
 fn part1() {
-    let content = load_file("day2");
+    let content = load_file(2);
     let lines = content
         .lines();
 
@@ -31,7 +31,7 @@ fn part1() {
 }
 
 fn part2() {
-    let content = load_file("day2");
+    let content = load_file(2);
     let lines = content.lines();
 
     let mut total_length: i64 = 0;
