@@ -14,10 +14,13 @@ abstract class SomeDayTest<In, Out>(
 
     abstract fun List<String>.mapData(): List<In>
 
+    abstract val resultTest1 :Out
+    abstract val resultTest2 :Out
+
     @Test
     fun partOneTest() {
         val result = someDay.partOne(rawTestData.mapData())
-        assertEquals(7, result)
+        assertEquals(resultTest1, result)
     }
 
     @Test
@@ -29,7 +32,7 @@ abstract class SomeDayTest<In, Out>(
     @Test
     fun partTwoTest() {
         val result = someDay.partTwo(rawTestData.mapData())
-        assertEquals(5, result)
+        assertEquals(resultTest2, result)
     }
 
     @Test
