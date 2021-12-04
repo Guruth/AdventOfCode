@@ -6,7 +6,7 @@ object Day03 : SomeDay<List<Char>, Int> {
         val epsilon = mutableListOf<Char>()
 
         repeat(input.first().size) { index ->
-            val list = input.map { it.get(index) }
+            val list = input.map { it[index] }
             val count = list.groupingBy { it }.eachCount()
             val numZero = count['0']!!
             val numOne = count['1']!!
