@@ -8,6 +8,13 @@ plugins {
 group = "sh.weller.aoc"
 version = "1.0-SNAPSHOT"
 
+idea {
+    module {
+        isDownloadJavadoc = true
+        isDownloadSources = true
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -19,7 +26,6 @@ dependencies {
 //    implementation("org.jetbrains.kotlinx:multik-api:0.1.1")
 //    implementation("org.jetbrains.kotlinx:multik-default:0.1.1")
 
-
     testImplementation(kotlin("test"))
 }
 
@@ -28,5 +34,6 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "17"
 }
+
