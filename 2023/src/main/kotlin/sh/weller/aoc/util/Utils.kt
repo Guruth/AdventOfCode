@@ -7,6 +7,12 @@ fun List<Number>.product(): Long =
     this.map { it.toLong() }
         .reduce { i, j -> i * j }
 
+fun List<List<*>>.print() {
+    for (row in this) {
+        println(row.joinToString(""))
+    }
+}
+
 fun <T> copy(input: List<T>): List<T> = input.toList()
 
 @JvmName("copyList")
