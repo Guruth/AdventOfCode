@@ -130,13 +130,6 @@ object Day10 : SomeDay<String, Int> {
         return expandedConnectedMaze
     }
 
-    private fun Maze.print() {
-        for (row in this) {
-            println(row.joinToString(""))
-        }
-    }
-
-
     private fun Maze.moveForward(currentCoordinate: Coordinate, previousCoordinate: Coordinate): Coordinate {
         return connectingPipes(currentCoordinate)
             .filterNot { previousCoordinate == it }
