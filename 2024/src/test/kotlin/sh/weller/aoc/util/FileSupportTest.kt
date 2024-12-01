@@ -14,7 +14,7 @@ internal class FileSupportTest {
             123
         )
 
-        val result = fileToList<Int>("sh/weller/aoc/util/intList.txt")
+        val result = fileToList<Int>("util/intList.txt")
         assertEquals(expectedData, result)
     }
 
@@ -27,7 +27,7 @@ internal class FileSupportTest {
             123.0
         )
 
-        val result = fileToList<Double>("sh/weller/aoc/util/doubleList.txt")
+        val result = fileToList<Double>("util/doubleList.txt")
         assertEquals(expectedData, result)
     }
 
@@ -35,14 +35,14 @@ internal class FileSupportTest {
     @Test
     fun fileToInvalidList() {
         assertThrows<NumberFormatException> {
-            fileToList<Int>("sh/weller/aoc/util/invalidList.txt")
+            fileToList<Int>("util/invalidList.txt")
         }
     }
 
     @Test
     fun notFoundList() {
         assertThrows<NullPointerException> {
-            fileToList<Int>("sh/weller/aoc/util/foo.txt")
+            fileToList<Int>("util/foo.txt")
         }
     }
 

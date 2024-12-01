@@ -8,15 +8,15 @@ plugins {
 group = "sh.weller.aoc"
 version = "1.0-SNAPSHOT"
 
+repositories {
+    mavenCentral()
+}
+
 idea {
     module {
         isDownloadJavadoc = true
         isDownloadSources = true
     }
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
@@ -31,5 +31,11 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-}
 
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+
+    //if true show println in test console
+    testLogging.showStandardStreams = false
+}
