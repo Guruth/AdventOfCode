@@ -8,15 +8,12 @@ import org.junit.jupiter.api.TestMethodOrder
 import sh.weller.aoc.util.readFile
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-abstract class SomeDayTest<In, Out>(
-    private val day: Int,
-    private val someDay: SomeDay<In, Out>
+abstract class SomeDayTest<Out : Number>(
+    private val someDay: SomeDay<Out>
 ) {
 
-    private val rawTestData = readFile("day$day/test_data")
-    private val rawData = readFile("day$day/data")
-
-    abstract fun List<String>.mapData(): List<In>
+    private val rawTestData = readFile("day${someDay.day}/test_data")
+    private val rawData = readFile("day${someDay.day}/data")
 
     abstract val resultTest1: Out
     abstract val resultTest2: Out
@@ -24,32 +21,32 @@ abstract class SomeDayTest<In, Out>(
     @Test
     @Order(0)
     fun partOneTest() {
-        val result = someDay.partOne(rawTestData.mapData())
+        val result = someDay.partOne(rawTestData)
         assertEquals(resultTest1, result)
     }
 
     @Test
     @Order(1)
     fun partOneReal() {
-        val result = someDay.partOne(rawData.mapData())
-        printResult(day, 1, result)
+        val result = someDay.partOne(rawData)
+        printResult(1, result)
     }
 
     @Test
     @Order(2)
     fun partTwoTest() {
-        val result = someDay.partTwo(rawTestData.mapData())
+        val result = someDay.partTwo(rawTestData)
         assertEquals(resultTest2, result)
     }
 
     @Test
     @Order(3)
     fun partTwoReal() {
-        val result = someDay.partTwo(rawData.mapData())
-        printResult(day, 2, result)
+        val result = someDay.partTwo(rawData)
+        printResult(2, result)
     }
 
-    private fun printResult(day: Int, part: Int, result: Out) {
-        println("Result Day $day-$part: $result")
+    private fun printResult(part: Int, result: Out) {
+        println("Result Day ${someDay.day}-$part: $result")
     }
 }
