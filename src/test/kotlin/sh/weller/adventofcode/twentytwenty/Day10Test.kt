@@ -63,6 +63,16 @@ class Day10Test {
 
         result = testData2.findPathsInSplitGraph()
         assertEquals(19208, result)
+
+        // Brute Force
+        result = listOf(1, 2, 3, 4).findPathsBruteForce()
+        assertEquals(7, result)
+
+        result = testData.findPathsBruteForce()
+        assertEquals(8, result)
+
+        result = testData2.findPathsBruteForce()
+        assertEquals(19208, result)
     }
 
     @Test
