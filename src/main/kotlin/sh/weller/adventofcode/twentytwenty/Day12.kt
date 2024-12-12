@@ -18,42 +18,16 @@ fun List<String>.day12Part2(): Int {
                 'W' -> xWaypointPosition -= it.second
                 'N' -> yWaypointPosition += it.second
 
-                'L' -> when (it.second) {
-                    90 -> {
-                        val tmpX = xWaypointPosition
-                        val tmpY = yWaypointPosition
-                        xWaypointPosition = -tmpY
-                        yWaypointPosition = tmpX
-                    }
-                    180 -> {
-                        xWaypointPosition = -xWaypointPosition
-                        yWaypointPosition = -yWaypointPosition
-                    }
-                    270 -> {
-                        val tmpX = xWaypointPosition
-                        val tmpY = yWaypointPosition
-                        xWaypointPosition = tmpY
-                        yWaypointPosition = -tmpX
-                    }
+                'L' -> {
+                    val (x, y) = (xWaypointPosition to yWaypointPosition).part2Rotate(it)
+                    xWaypointPosition = x
+                    yWaypointPosition = y
                 }
+                'R' -> {
+                    val (x, y) = (xWaypointPosition to yWaypointPosition).part2Rotate(it)
+                    xWaypointPosition = x
+                    yWaypointPosition = y
 
-                'R' -> when (it.second) {
-                    90 -> {
-                        val tmpX = xWaypointPosition
-                        val tmpY = yWaypointPosition
-                        xWaypointPosition = tmpY
-                        yWaypointPosition = -tmpX
-                    }
-                    180 -> {
-                        xWaypointPosition = -xWaypointPosition
-                        yWaypointPosition = -yWaypointPosition
-                    }
-                    270 -> {
-                        val tmpX = xWaypointPosition
-                        val tmpY = yWaypointPosition
-                        xWaypointPosition = -tmpY
-                        yWaypointPosition = tmpX
-                    }
                 }
                 'F' -> {
                     xShipPosition += (xWaypointPosition * it.second)
@@ -64,6 +38,16 @@ fun List<String>.day12Part2(): Int {
 
     return xShipPosition.absoluteValue + yShipPosition.absoluteValue
 }
+
+fun Pair<Int, Int>.part2Rotate(instruction: Pair<Char, Int>): Pair<Int, Int> =
+    when ("${instruction.first}${instruction.second}") {
+        "L90", "R270" -> Pair(-second, first)
+        "L180", "R180" -> Pair(-first, -second)
+        "R90", "L270" -> Pair(second, -first)
+        else -> {
+            throw IllegalArgumentException("${instruction.first}${instruction.second} not known")
+        }
+    }
 
 
 fun List<String>.day12Part1(): Int {
