@@ -1,5 +1,7 @@
 package sh.weller.adventofcode.twentytwenty
 
+import sh.weller.adventofcode.util.copy
+
 
 fun List<String>.day17Part2(numCycles: Int = 6): Int {
     val initialGrid = this.map { it.toCharArray().toMutableList() }.toMutableList()
@@ -186,22 +188,4 @@ private fun List<List<List<List<Char>>>>.mutateAtPoint(w: Int, z: Int, y: Int, x
             '.' // Remains inactive
         }
     }
-}
-
-private fun MutableList<MutableList<MutableList<MutableList<Char>>>>.copy(): List<List<List<List<Char>>>> {
-    val tmpCube = mutableListOf<List<List<List<Char>>>>()
-    this.forEach { wLayer ->
-        val tmpWList = mutableListOf<List<List<Char>>>()
-        wLayer.forEach { zLayer ->
-            val tmpZList = mutableListOf<List<Char>>()
-            zLayer.forEach { yLayer ->
-                val tmpYLayer = mutableListOf<Char>()
-                tmpYLayer.addAll(yLayer)
-                tmpZList.add(tmpYLayer)
-            }
-            tmpWList.add(tmpZList)
-        }
-        tmpCube.add(tmpWList)
-    }
-    return tmpCube
 }
