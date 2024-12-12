@@ -9,14 +9,14 @@ fun List<String>.countBagsThatAreContained(color: String): Long {
     return rootBag!!.getNumOfContainedBags()
 }
 
-fun ContainedBag.getNumOfContainedBags(): Long {
+private fun ContainedBag.getNumOfContainedBags(): Long {
     if (this.containedBags.isEmpty()) {
         return 0
     }
     return this.containedBags.map { it.getNumOfContainedBags() + 1 }.sum()
 }
 
-fun ContainedBag.appendLevel(parsedInput: List<List<Pair<String, Int>>>): ContainedBag? {
+private fun ContainedBag.appendLevel(parsedInput: List<List<Pair<String, Int>>>): ContainedBag? {
     if (this.color == "other") {
         return null
     }
@@ -32,16 +32,10 @@ fun ContainedBag.appendLevel(parsedInput: List<List<Pair<String, Int>>>): Contai
     return this
 }
 
-data class ContainedBag(
+private data class ContainedBag(
     val color: String,
-    var containedBags: MutableList<ContainedBag> = mutableListOf<ContainedBag>()
+    var containedBags: MutableList<ContainedBag> = mutableListOf()
 )
-
-fun List<List<Pair<String, Int>>>.getContained(colors: List<String>): List<Pair<String, Int>> =
-    this
-        .filter { colors.contains(it.first().first) }
-        .map { it.drop(1) }
-        .flatten()
 
 
 fun List<String>.countBagsWhichContain(color: String): Int {
@@ -64,7 +58,7 @@ fun List<String>.countBagsWhichContain(color: String): Int {
 }
 
 
-fun List<List<Pair<String, Int>>>.findWhichContain(colors: List<String>): List<String> {
+private fun List<List<Pair<String, Int>>>.findWhichContain(colors: List<String>): List<String> {
     val canContain = mutableListOf<String>()
     this.forEach {
         if (it.drop(1).map { bag -> bag.first }.containsOneOf(colors)) {
@@ -74,7 +68,7 @@ fun List<List<Pair<String, Int>>>.findWhichContain(colors: List<String>): List<S
     return canContain
 }
 
-fun List<String>.containsOneOf(others: List<String>): Boolean {
+private fun List<String>.containsOneOf(others: List<String>): Boolean {
     var contains = false
     others.forEach { other ->
         this.forEach {
@@ -87,7 +81,7 @@ fun List<String>.containsOneOf(others: List<String>): Boolean {
 }
 
 
-fun List<String>.parseBaggageInput(): List<List<Pair<String, Int>>> {
+private fun List<String>.parseBaggageInput(): List<List<Pair<String, Int>>> {
     val parsedBags = mutableListOf<List<Pair<String, Int>>>()
     var currentLine = mutableListOf<Pair<String, Int>>()
 
@@ -95,17 +89,21 @@ fun List<String>.parseBaggageInput(): List<List<Pair<String, Int>>> {
         val bagsList = it.removeSuffix(".").split(Regex("contain|,"))
         bagsList.forEach { bag ->
             val splitBag = bag.trim().split(" ")
-            var number = 0
-            var color = ""
-            if (splitBag[0].toIntOrNull() != null) {
-                number = splitBag[0].toInt()
-                color = splitBag[1] + " " + splitBag[2]
-            } else if (splitBag[0] == "no") {
-                number = 0
-                color = "other"
-            } else {
-                number = 1
-                color = splitBag[0] + " " + splitBag[1]
+            val number: Int
+            val color: String
+            when {
+                splitBag[0].toIntOrNull() != null -> {
+                    number = splitBag[0].toInt()
+                    color = splitBag[1] + " " + splitBag[2]
+                }
+                splitBag[0] == "no" -> {
+                    number = 0
+                    color = "other"
+                }
+                else -> {
+                    number = 1
+                    color = splitBag[0] + " " + splitBag[1]
+                }
             }
             currentLine.add(Pair(color, number))
 
