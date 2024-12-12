@@ -24,14 +24,14 @@ class Day20Test {
 
     @Test
     fun partTwoTest() {
-//        val result = testData.
-//        assertEquals(0, result)
+        val result = testData.day20Part2()
+        assertEquals(273, result)
     }
 
     @Test
     fun partTwoReal() {
-//        val result = realData.
-//        printResult(day, 2, result)
+        val result = realData.day20Part2()
+        printResult(day, 2, result)
     }
 }
 
