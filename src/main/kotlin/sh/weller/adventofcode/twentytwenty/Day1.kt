@@ -1,5 +1,5 @@
 fun List<Int>.getMultipliedForSumOfDepth(sum: Int, depth: Int): Int? {
-    val explodedList = this.explode(depth)
+    val explodedList = this.permutations(depth)
     explodedList.forEach {
         if (it.sum() == sum) {
             return it.multipliedSum()
@@ -11,20 +11,20 @@ fun List<Int>.getMultipliedForSumOfDepth(sum: Int, depth: Int): Int? {
 fun List<Int>.multipliedSum(): Int =
     this.reduce { i, j -> i * j }
 
-fun List<Int>.explode(depth: Int = 2): List<List<Int>> =
-    this.prepareExplode().explodeRec(depth)
+fun List<Int>.permutations(depth: Int = 2): List<List<Int>> =
+    this.preparePermutations().permutationsRec(depth)
 
-private fun List<Int>.prepareExplode(): List<List<Int>> =
+private fun List<Int>.preparePermutations(): List<List<Int>> =
     this.map {
         listOf(it)
     }
 
-private fun List<List<Int>>.explodeRec(depth: Int): List<List<Int>> =
+private fun List<List<Int>>.permutationsRec(depth: Int): List<List<Int>> =
     if (depth == 1) {
         this
     } else {
         val retList = mutableListOf<List<Int>>()
-        val explodedList = this.explodeRec(depth - 1)
+        val explodedList = this.permutationsRec(depth - 1)
         this.forEach { outer ->
             explodedList
                 .forEach { inner ->
