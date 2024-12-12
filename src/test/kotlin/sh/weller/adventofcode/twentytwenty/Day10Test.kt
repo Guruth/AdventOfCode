@@ -13,7 +13,7 @@ class Day10Test {
 
     @Test
     fun partOneTest() {
-        val result = testData.countJoltDifferences()
+        val result = testData2.countJoltDifferences()
         assertEquals(22 * 10, result)
     }
 
