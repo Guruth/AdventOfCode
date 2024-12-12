@@ -150,3 +150,27 @@ target/
 Cargo.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/rust
+replay_pid*
+.idea/**/aws.xml
+.idea/sonarlint/
+!src/**/build/
+!gradle-wrapper.properties
+.project
+.classpath
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
