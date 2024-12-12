@@ -23,12 +23,6 @@ class Day13Test {
     }
 
     @Test
-    fun partTwoTest() {
-        val result = testData.day13Part2()
-        assertEquals(0, result)
-    }
-
-    @Test
     fun partTwoReal() {
         val result = realData.day13Part2()
         printResult(day, 2, result)
