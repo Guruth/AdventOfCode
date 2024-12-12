@@ -1,7 +1,7 @@
 package sh.weller.aoc.util
 
-fun List<String>.to2DList(): List<List<Char>> =
-    map { it.toCharArray().toList() }
+fun List<String>.to2DList(): MutableList<MutableList<Char>> =
+    map { it.toCharArray().toMutableList() }.toMutableList()
 
 fun List<Number>.product(): Long =
     this.map { it.toLong() }
