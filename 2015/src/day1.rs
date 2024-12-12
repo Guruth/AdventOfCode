@@ -7,7 +7,7 @@ pub fn run() {
 
 
 fn part1() {
-    let floor_map_string = load_file("day1");
+    let floor_map_string = load_file(1);
     let floor_map: Vec<char> = floor_map_string.chars().collect();
 
     let mut current_floor: i32 = 0;
@@ -24,7 +24,7 @@ fn part1() {
 }
 
 fn part2() {
-    let floor_map_string = load_file("day1");
+    let floor_map_string = load_file(1);
     let floor_map: Vec<char> = floor_map_string.chars().collect();
 
     let mut current_floor = 1;

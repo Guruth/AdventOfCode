@@ -9,7 +9,7 @@ pub fn run() {
 
 
 fn part1() {
-    let navigation: Vec<char> = load_file("day3").chars().collect();
+    let navigation: Vec<char> = load_file(3).chars().collect();
 
     let mut current_position = (0, 0);
     let mut map: HashMap<(i32, i32), i32> = HashMap::new();
@@ -26,7 +26,7 @@ fn part1() {
 }
 
 fn part2() {
-    let navigation_string = load_file("day3");
+    let navigation_string = load_file(3);
     let navigation = navigation_string.chars().enumerate();
 
     let mut santa_current_position = (0, 0);
