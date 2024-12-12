@@ -11,9 +11,9 @@ fun List<String>.validatePassportsPartTwo(expectedFieldKeys: List<String>): Int 
         }
         .filter {
             val isValid = it.isValidPassportPartTwo()
-            if (!isValid) {
+//            if (!isValid) {
 //                println(it)
-            }
+//            }
             return@filter isValid
         }
 
@@ -53,14 +53,13 @@ fun List<Pair<String, String>>.isValidPassportPartTwo(): Boolean {
     val ecl = this.firstOrNull { it.first == "ecl" }?.let {
         it.second in listOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
     } ?: false
-    val pid = this.firstOrNull { it.first == "pid" }?.let {
-        it.second.let {
-            val hasLength = it.toCharArray().size == 9
-            return@let if (hasLength) {
-                it.toIntOrNull() != null
-            } else {
-                false
-            }
+    val pid = this.firstOrNull { it.first == "pid" }?.let { pidPair ->
+        val pidValue = pidPair.second
+        val hasLength = pidValue.toCharArray().size == 9
+        return@let if (hasLength) {
+            pidValue.toIntOrNull() != null
+        } else {
+            false
         }
     } ?: false
 
@@ -76,15 +75,14 @@ fun List<String>.validatePassports(expectedFieldKeys: List<String>): Int {
 //    println("Possible Passports: ${passports.filter { it.size >= 7 }.size}")
 
     val validPassports = passports.filter {
-        val isValid = it.map { it.first }
+        it.map { it.first }
             .containsAll(expectedFieldKeys)
-        return@filter isValid
     }
 
     return validPassports.size
 }
 
-fun List<String>.parsePassports(): List<List<Pair<String, String>>> {
+private fun List<String>.parsePassports(): List<List<Pair<String, String>>> {
     val passportList = mutableListOf<List<Pair<String, String>>>()
     var tmpList = mutableListOf<Pair<String, String>>()
 //    println("Blank Lines ${this.filter { it.isBlank() }.count()}")
