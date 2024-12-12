@@ -1,7 +1,7 @@
 package sh.weller.adventofcode.twentytwenty
 
 import org.junit.jupiter.api.Test
-import util.fileToList
+import sh.weller.adventofcode.util.fileToList
 import kotlin.test.assertEquals
 
 internal class Day2Test {

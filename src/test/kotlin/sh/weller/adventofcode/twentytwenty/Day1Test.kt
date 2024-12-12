@@ -2,7 +2,7 @@ package sh.weller.adventofcode.twentytwenty
 
 import getMultipliedForSumOfDepth
 import org.junit.jupiter.api.Test
-import util.fileToList
+import sh.weller.adventofcode.util.fileToList
 import kotlin.test.assertEquals
 
 internal class Day1Test {
@@ -17,7 +17,7 @@ internal class Day1Test {
             1456
         )
         val testSum = 2020
-        val expectedResult = 514579
+        val expectedResult = 514579L
 
         val result = testData.getMultipliedForSumOfDepth(testSum, 2)
 
@@ -44,7 +44,7 @@ internal class Day1Test {
             1456
         )
         val testSum = 2020
-        val expectedResult = 241861950
+        val expectedResult = 241861950L
 
         val result = testData.getMultipliedForSumOfDepth(testSum, 3)
 
