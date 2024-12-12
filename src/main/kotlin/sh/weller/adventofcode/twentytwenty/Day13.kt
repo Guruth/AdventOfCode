@@ -7,14 +7,12 @@ fun List<String>.day13Part1(): Int {
 
     val earliestPerLine: List<Pair<Int, Int>> = busLines.map {
         var counter = 1
-        while (true) {
-            val tmpTime = it * counter
-            if (tmpTime >= earliestTime) {
-                return@map Pair(it, tmpTime)
-            }
+        var tmpTime: Int
+        do {
+            tmpTime = it * counter
             counter++
-        }
-        return@map Pair(0, 0)
+        } while (tmpTime < earliestTime)
+        return@map Pair(it, tmpTime)
     }
 
     val fastestBus = earliestPerLine.minByOrNull { it.second }!!
