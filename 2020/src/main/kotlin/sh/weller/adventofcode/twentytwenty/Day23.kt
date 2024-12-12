@@ -1,8 +1,8 @@
 package sh.weller.adventofcode.twentytwenty
 
 import org.magicwerk.brownies.collections.primitive.IntGapList
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.ExperimentalTime
-import kotlin.time.milliseconds
 
 
 @ExperimentalTime

@@ -11,7 +11,7 @@ class UtilTest {
             listOf('*', '*', '*'),
             listOf('*', '*', '#')
         )
-        val result = readFile("sh/weller/aoc/util/2dList.txt").to2DList()
+        val result = readFile("util/2dList.txt").to2DList()
         assertEquals(expectedData, result)
     }
 
