@@ -1,7 +1,9 @@
 package sh.weller.adventofcode.twentytwenty
 
 import sh.weller.adventofcode.util.fileToList
+import sh.weller.adventofcode.util.printResult
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class Day5Test {
     val testData = fileToList<String>("2020/Day5TestData.txt")
@@ -9,14 +11,25 @@ class Day5Test {
 
     @Test
     fun partOneTest() {
-//        val result =
-//        assertEquals(0, result)
+        val testData = listOf(
+            "BFFFBBFRRR",
+            "FFFBBBFRRR",
+            "BBFFBBFRLL"
+        )
+        val expectedResult = listOf(
+            567,
+            119,
+            820
+        )
+
+        val result = testData.toSeatId()
+        assertEquals(expectedResult, result)
     }
 
     @Test
     fun partOneReal() {
-//        val result =
-//        printResult(5, 1, result)
+        val result = realData.findHighestSeatId()
+        printResult(5, 1, result)
     }
 
     @Test
@@ -27,7 +40,10 @@ class Day5Test {
 
     @Test
     fun partTwoReal() {
-//        val result =
-//        printResult(5, 2, result)
+        realData.printEmptySeats()
     }
 }
+
+// 7 Chars row 3 Chars Column
+
+val rows = 128
