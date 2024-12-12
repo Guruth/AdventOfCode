@@ -97,7 +97,7 @@ object Day06 : SomeDay<Int> {
                     possibleObstructions--
                 }
                 totalNumber--
-                println("Total to go: $totalNumber - Possible to go: $possibleObstructions")
+//                println("Total to go: $totalNumber - Possible to go: $possibleObstructions")
             }
         }
 

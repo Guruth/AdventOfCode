@@ -1,6 +1,6 @@
 package sh.weller.aoc
 
-class Day10Test : SomeDayTest<Long>(Day11) {
-    override val resultTest1: Long = 55312
-    override val resultTest2: Long = 0
+class Day10Test : SomeDayTest<Int>(Day10) {
+    override val resultTest1: Int = 36
+    override val resultTest2: Int = 81
 }
