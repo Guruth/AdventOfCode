@@ -10,6 +10,6 @@ fun List<Long>.multipliedSumLong(): Long =
         .map { it }
         .reduce { i, j -> i * j }
 
-fun printResult(day: Int, part: Int, result: Number) {
+fun printResult(day: Int, part: Int, result: Any) {
     println("Result Day $day-$part: $result")
 }
