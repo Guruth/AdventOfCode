@@ -1,26 +1,40 @@
 package sh.weller.adventofcode.twentytwenty
 
 
-fun List<String>.countBagsThatareContained(color: String): Long {
+fun List<String>.countBagsThatAreContained(color: String): Long {
     val parsedInput = this.parseBaggageInput()
 
+    val rootBag = ContainedBag(color).appendLevel(parsedInput)
 
-//    var foundOther = true
-//    var searchColors = listOf(color)
-//    val rootBag =
-//        ContainedBag(
-//            color,
-//            parsedInput.getContained(listOf(color)).map { Pair(ContainedBag(it.first, emptyList()), it.second) })
-//    do {
-//        val searchColors = rootBag.containedBags
-//    } while (foundOther)
+    return rootBag!!.getNumOfContainedBags()
+}
 
-    return 0
+fun ContainedBag.getNumOfContainedBags(): Long {
+    if (this.containedBags.isEmpty()) {
+        return 0
+    }
+    return this.containedBags.map { it.getNumOfContainedBags() + 1 }.sum()
+}
+
+fun ContainedBag.appendLevel(parsedInput: List<List<Pair<String, Int>>>): ContainedBag? {
+    if (this.color == "other") {
+        return null
+    }
+    val containedBagsLine = parsedInput.find { it.first().first == this.color }!!.drop(1)
+
+    containedBagsLine
+        .forEach {
+            val tmpBag = ContainedBag(it.first).appendLevel(parsedInput)
+            if (tmpBag != null) {
+                repeat((1..it.second).count()) { this.containedBags.add(tmpBag) }
+            }
+        }
+    return this
 }
 
 data class ContainedBag(
     val color: String,
-    var containedBags: List<Pair<ContainedBag, Int>>?
+    var containedBags: MutableList<ContainedBag> = mutableListOf<ContainedBag>()
 )
 
 fun List<List<Pair<String, Int>>>.getContained(colors: List<String>): List<Pair<String, Int>> =
@@ -72,19 +86,6 @@ fun List<String>.containsOneOf(others: List<String>): Boolean {
     return contains
 }
 
-fun List<List<Pair<String, Int>>>.toBagNode(): List<List<BagNode>> =
-    this.map {
-        it.map { bag ->
-            BagNode(bag.first, bag.second, emptyList())
-        }
-    }
-
-data class BagNode(
-    val color: String,
-    val number: Int,
-    val bagNodes: List<BagNode>
-)
-
 
 fun List<String>.parseBaggageInput(): List<List<Pair<String, Int>>> {
     val parsedBags = mutableListOf<List<Pair<String, Int>>>()
@@ -100,7 +101,7 @@ fun List<String>.parseBaggageInput(): List<List<Pair<String, Int>>> {
                 number = splitBag[0].toInt()
                 color = splitBag[1] + " " + splitBag[2]
             } else if (splitBag[0] == "no") {
-                number = 1
+                number = 0
                 color = "other"
             } else {
                 number = 1
