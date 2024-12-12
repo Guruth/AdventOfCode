@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.4.21"
+    idea
 }
 
 group = "sh.weller"
@@ -25,6 +26,3 @@ tasks.test {
     this.maxHeapSize = "8192m"
 }
 
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
-}

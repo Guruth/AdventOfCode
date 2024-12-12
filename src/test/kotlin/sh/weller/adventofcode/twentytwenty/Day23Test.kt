@@ -24,7 +24,7 @@ class Day23Test {
 
     @Test
     fun partTwoTest() {
-        val result = listOf(3, 8, 9, 1, 2, 5, 4, 6, 7).day23Part2()
+        val result = listOf(3, 8, 9, 1, 2, 5, 4, 6, 7).day23Part2(10)
         assertEquals(149245887792, result)
     }
 

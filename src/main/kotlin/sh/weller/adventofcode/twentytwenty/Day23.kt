@@ -6,10 +6,13 @@ import kotlin.time.milliseconds
 
 
 fun List<Int>.day23Part2(rounds: Int = 10000000): Long {
-    val cups = playCrabCups(rounds, (this + (this.maxOf { it }..1000000)))
+    val cups = playCrabCups(rounds, (this + ((this.maxOf { it }+1) .. 1000000)))
 
     val oneIndex = cups.indexOf(1)
-    return cups[oneIndex + 1].toLong() * cups[oneIndex + 2].toLong()
+    val cupAfterOne = cups[oneIndex + 1]
+    val cupTwoAfterOne = cups[oneIndex + 2]
+    println("$cupAfterOne - $cupTwoAfterOne")
+    return cupAfterOne.toLong() * cupTwoAfterOne.toLong()
 }
 
 fun List<Int>.day23Part1(rounds: Int = 100): String {
@@ -31,7 +34,7 @@ private fun playCrabCups(rounds: Int, cupsList: List<Int>): List<Int> {
     val start = System.currentTimeMillis().milliseconds
 
     repeat(rounds) { round ->
-        if (round % 100000 == 0) {
+        if (round % 10000 == 0) {
             val now = System.currentTimeMillis().milliseconds
             println("Round $round: ${now - start}")
         }
