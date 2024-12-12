@@ -4,7 +4,7 @@ import sh.weller.aoc.util.fileToList
 import kotlin.test.Test
 
 class Day01Test {
-    private val day = 0
+    private val day = 1
     private val testData = fileToList<String>("Day${day}TestData.txt")
     private val realData = fileToList<String>("Day${day}Data.txt")
 
