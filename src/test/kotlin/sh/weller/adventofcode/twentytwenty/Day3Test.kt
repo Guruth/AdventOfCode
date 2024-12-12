@@ -1,6 +1,7 @@
 package sh.weller.adventofcode.twentytwenty
 
 import sh.weller.adventofcode.util.fileTo2DList
+import sh.weller.adventofcode.util.printResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -23,7 +24,7 @@ class Day3Test {
 
         val result = data.countTreesWhileNavigating(pattern)
 
-        print("Result Day3 Part 1: $result")
+        printResult(3, 1, result)
     }
 
     @Test
@@ -57,6 +58,6 @@ class Day3Test {
 
         val resultOfAll = data.countTreesWhileNavigatingForMultiple(patterns)
 
-        println("Result Day3 Part 2: $resultOfAll")
+        printResult(3, 2, resultOfAll)
     }
 }

@@ -1,0 +1,10 @@
+package sh.weller.adventofcode.util
+
+fun List<Int>.multipliedSum(): Long =
+    this
+        .map { it.toLong() }
+        .reduce { i, j -> i * j }
+
+fun printResult(day: Int, part: Int, result: Number) {
+    println("Result Day $day-$part: $result")
+}

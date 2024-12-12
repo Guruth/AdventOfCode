@@ -2,6 +2,7 @@ package sh.weller.adventofcode.twentytwenty
 
 import org.junit.jupiter.api.Test
 import sh.weller.adventofcode.util.fileToList
+import sh.weller.adventofcode.util.printResult
 import kotlin.test.assertEquals
 
 internal class Day2Test {
@@ -22,7 +23,7 @@ internal class Day2Test {
         val data = fileToList<String>("2020/Day2Data.txt")
         val result = data.validatePasswords(ValidationType.COUNT)
 
-        println("Result Part One: $result")
+        printResult(2, 1, result)
     }
 
 
@@ -42,6 +43,6 @@ internal class Day2Test {
         val data = fileToList<String>("2020/Day2Data.txt")
         val result = data.validatePasswords(ValidationType.POSITION)
 
-        print("Result Part Two: $result")
+        printResult(2, 2, result)
     }
 }
