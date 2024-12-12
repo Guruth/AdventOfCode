@@ -1,13 +1,7 @@
 package sh.weller.adventofcode.util
 
-fun List<Int>.multipliedSum(): Long =
-    this
-        .map { it.toLong() }
-        .reduce { i, j -> i * j }
-
-fun List<Long>.multipliedSumLong(): Long =
-    this
-        .map { it }
+fun List<Number>.product(): Long =
+    this.map { it.toLong() }
         .reduce { i, j -> i * j }
 
 fun printResult(day: Int, part: Int, result: Any) {

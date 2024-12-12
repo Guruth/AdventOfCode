@@ -1,7 +1,7 @@
 package sh.weller.adventofcode.twentytwenty
 
 import sh.weller.adventofcode.util.copy
-import sh.weller.adventofcode.util.multipliedSum
+import sh.weller.adventofcode.util.product
 import kotlin.math.sqrt
 
 
@@ -78,7 +78,6 @@ private fun List<Pair<Int, Int>>.isPartOfSeaMonster(currentRow: Int, currentColu
 
 private fun List<List<Char>>.transformUntilSeaMonstersFound(): Pair<List<List<Char>>, List<Pair<Int, Int>>> {
     var tileImage = this
-    var seaMonsterLocation: List<Pair<Int, Int>> = emptyList()
     repeat(4) {
         val tmpMonsters = tileImage.findSeaMonsters()
         if (tmpMonsters.isNotEmpty()) {
@@ -318,7 +317,7 @@ fun List<List<Char>>.day20Part1(): Long {
     return neighbours
         .filter { it.value.size == 2 }
         .map { it.key }
-        .multipliedSum()
+        .product()
 }
 
 private fun List<List<Char>>.mapToTiles(): Map<Int, List<List<Char>>> {

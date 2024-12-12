@@ -1,6 +1,6 @@
 package sh.weller.adventofcode.twentytwenty
 
-import sh.weller.adventofcode.util.multipliedSum
+import sh.weller.adventofcode.util.product
 
 
 fun List<String>.day16Part2(): Long {
@@ -71,7 +71,7 @@ fun List<String>.day16Part2(): Long {
 
     return determinedRules.filter { it.first.startsWith("departure") }
         .map { myTicket[it.second] }
-        .multipliedSum()
+        .product()
 }
 
 
