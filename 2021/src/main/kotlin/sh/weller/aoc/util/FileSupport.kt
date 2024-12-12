@@ -1,26 +1,16 @@
 package sh.weller.aoc.util
 
-fun fileTo2DList(fileName: String): List<List<Char>> {
-    val listOfStrings = fileToList<String>(fileName)
-    return listOfStrings
-        .map {
-            it.toCharArray().toList()
-        }
-}
+fun readFile(fileName: String): List<String> =
+    object {}.javaClass.getResourceAsStream("/$fileName").bufferedReader().readLines()
 
-inline fun <reified T> fileToList(fileName: String): List<T> {
-    val inputStream = object {}.javaClass.getResourceAsStream("/$fileName")
-        ?: return emptyList()
+inline fun <reified T> fileToList(fileName: String): List<T> =
+    readFile(fileName)
+        .map(::parseTo)
 
-    return inputStream.reader().readLines()
-        .mapNotNull { it.parseTo() }
-}
-
-inline fun <reified T> String.parseTo(): T? =
+inline fun <reified T> parseTo(value: String): T =
     when (T::class) {
-        Int::class -> this.toIntOrNull()
-        Double::class -> this.toDoubleOrNull()
-        String::class -> this
+        Int::class -> value.toInt()
+        Double::class -> value.toDouble()
+        String::class -> value
         else -> throw IllegalStateException("Unsupported Generic Type")
     } as T
-

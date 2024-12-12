@@ -1,16 +1,16 @@
 package sh.weller.aoc
 
-object Day01 {
-    fun first(numbers: List<Int>): Int {
-        return numbers
+object Day01 : SomeDay<Int, Int> {
+    override fun partOne(input: List<Int>): Int {
+        return input
             .windowed(2)
             .count { (first, second) ->
                 second > first
             }
     }
 
-    fun second(numbers: List<Int>): Int {
-        return numbers
+    override fun partTwo(input: List<Int>): Int {
+        return input
             .windowed(3) { it.sum() }
             .windowed(2)
             .count { (first, second) ->

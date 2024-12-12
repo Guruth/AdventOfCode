@@ -1,6 +1,7 @@
 package sh.weller.aoc.util
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 
 internal class FileSupportTest {
@@ -33,29 +34,17 @@ internal class FileSupportTest {
 
     @Test
     fun fileToInvalidList() {
-        val expectedData = listOf(
-            123,
-        )
-
-        val result = fileToList<Int>("util/invalidList.txt")
-        assertEquals(expectedData, result)
+        assertThrows<NumberFormatException> {
+            fileToList<Int>("util/invalidList.txt")
+        }
     }
 
     @Test
     fun notFoundList() {
-        val expectedData = emptyList<Any>()
-        val result = fileToList<Int>("util/foo.txt")
-        assertEquals(expectedData, result)
+        assertThrows<NullPointerException> {
+            fileToList<Int>("util/foo.txt")
+        }
     }
 
-    @Test
-    fun fileTo2dListTest() {
-        val expectedData = listOf(
-            listOf('*', '#', '*'),
-            listOf('*', '*', '*'),
-            listOf('*', '*', '#')
-        )
-        val result = fileTo2DList("util/2dList.txt")
-        assertEquals(expectedData, result)
-    }
+
 }
