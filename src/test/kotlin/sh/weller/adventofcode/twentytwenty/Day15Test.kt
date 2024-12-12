@@ -1,14 +1,13 @@
 package sh.weller.adventofcode.twentytwenty
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import sh.weller.adventofcode.util.fileToList
 import sh.weller.adventofcode.util.printResult
 import kotlin.test.Test
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTime
 
 class Day15Test {
     private val day = 15
-    private val testData = fileToList<Int>("2020/Day${day}TestData.txt")
-    private val realData = fileToList<Int>("2020/Day${day}Data.txt")
 
     @Test
     fun partOneTest() {
@@ -30,14 +29,14 @@ class Day15Test {
         result = listOf(3, 2, 1).day15()
         assertEquals(438, result)
 
-        result = listOf(3,1,2).day15()
+        result = listOf(3, 1, 2).day15()
         assertEquals(1836, result)
 
     }
 
     @Test
     fun partOneReal() {
-        val result = listOf(0,6,1,7,2,19,20).day15()
+        val result = listOf(0, 6, 1, 7, 2, 19, 20).day15()
         printResult(day, 1, result)
     }
 
@@ -61,14 +60,19 @@ class Day15Test {
         result = listOf(3, 2, 1).day15(30000000)
         assertEquals(18, result)
 
-        result = listOf(3,1,2).day15(30000000)
+        result = listOf(3, 1, 2).day15(30000000)
         assertEquals(362, result)
     }
 
+    @OptIn(ExperimentalTime::class)
     @Test
     fun partTwoReal() {
-        val result = listOf(0,6,1,7,2,19,20).day15(30000000)
-        printResult(day, 2, result)
+        val elapsedTime = measureTime {
+            val result = listOf(0, 6, 1, 7, 2, 19, 20).day15(30000000)
+            printResult(day, 2, result)
+        }
+
+        println("Took $elapsedTime") // 14.4s
     }
 }
 
