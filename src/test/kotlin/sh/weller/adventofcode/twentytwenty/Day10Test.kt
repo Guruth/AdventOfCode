@@ -13,13 +13,13 @@ class Day10Test {
 
     @Test
     fun partOneTest() {
-        val result = testData.countJoltDiffereneces()
+        val result = testData.countJoltDifferences()
         assertEquals(22 * 10, result)
     }
 
     @Test
     fun partOneReal() {
-        val result = realData.countJoltDiffereneces()
+        val result = realData.countJoltDifferences()
         printResult(day, 1, result)
     }
 
@@ -27,6 +27,14 @@ class Day10Test {
     fun partTwoTest() {
         var result = listOf(1, 2, 3, 4).findPossibleVariations()
         assertEquals(7, result)
+        // adapters     [0, 1, 2, 3, 4, 7]
+        // leafCounter  [1, 1, 2, 4, 7, 7]
+        // 0:       0 - []        =>          => Push 1
+        // 1:       1 - [0]       =>  1 Edge  => Push 1
+        // 2:       2 - [0, 1]    =>  2 Edge  => Push 1 + 1
+        // 3:       3 - [0, 1, 2] =>  3 Edges => Push 1 + 1 + 2
+        // 4:       4 - [1, 2, 3] =>  3 Edges => Push 1 + 2 + 4
+        // 5:       7 - [2, 3, 4] =>  1 Edge  => Push 7
 
         result = testData.findPossibleVariations()
         assertEquals(8, result)
