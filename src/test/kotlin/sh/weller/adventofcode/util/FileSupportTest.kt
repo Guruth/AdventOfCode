@@ -1,7 +1,8 @@
-package util
+package sh.weller.adventofcode.util
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import util.fileToList
 
 internal class FileSupportTest {
     @Test
