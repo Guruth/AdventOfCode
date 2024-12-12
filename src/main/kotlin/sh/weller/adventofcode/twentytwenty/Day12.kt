@@ -17,17 +17,10 @@ fun List<String>.day12Part2(): Int {
                 'S' -> yWaypointPosition -= it.second
                 'W' -> xWaypointPosition -= it.second
                 'N' -> yWaypointPosition += it.second
-
-                'L' -> {
-                    val (x, y) = (xWaypointPosition to yWaypointPosition).part2Rotate(it)
-                    xWaypointPosition = x
-                    yWaypointPosition = y
-                }
-                'R' -> {
-                    val (x, y) = (xWaypointPosition to yWaypointPosition).part2Rotate(it)
-                    xWaypointPosition = x
-                    yWaypointPosition = y
-
+                'L', 'R' -> {
+                    val result = (xWaypointPosition to yWaypointPosition).part2Rotate(it)
+                    xWaypointPosition = result.first
+                    yWaypointPosition = result.second
                 }
                 'F' -> {
                     xShipPosition += (xWaypointPosition * it.second)
