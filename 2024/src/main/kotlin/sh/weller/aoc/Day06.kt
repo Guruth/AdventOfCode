@@ -1,13 +1,13 @@
 package sh.weller.aoc
 
-import sh.weller.aoc.util.to2DList
+import sh.weller.aoc.util.toCharMap
 
 object Day06 : SomeDay<Int> {
 
     override val day: Int = 6
 
     override fun partOne(input: List<String>): Int {
-        val map = input.to2DList().map { it.toMutableList() }.toMutableList()
+        val map = input.toCharMap().map { it.toMutableList() }.toMutableList()
         map.patrol()
         return map.flatten().count { it == 'X' }
     }
@@ -26,7 +26,7 @@ object Day06 : SomeDay<Int> {
     private fun List<List<Char>>.getAt(position: Pair<Int, Int>): Char? =
         this.getOrNull(position.first)?.getOrNull(position.second)
 
-    private fun MutableList<MutableList<Char>>.setAt(position: Pair<Int, Int>, newChar: Char) {
+    fun MutableList<MutableList<Char>>.setAt(position: Pair<Int, Int>, newChar: Char) {
         this[position.first][position.second] = newChar
     }
 
@@ -76,7 +76,7 @@ object Day06 : SomeDay<Int> {
     }
 
     override fun partTwo(input: List<String>): Int {
-        val map = input.to2DList().map { it.toMutableList() }.toMutableList()
+        val map = input.toCharMap().map { it.toMutableList() }.toMutableList()
         val initialPosition = map.getCurrent()
         map.patrol()
 
@@ -88,7 +88,7 @@ object Day06 : SomeDay<Int> {
             repeat(map.size) { x ->
                 if (map.getAt(y to x) == 'X') {
                     if ((initialPosition.first == y && initialPosition.second == x).not()) {
-                        val mapCopy = input.to2DList().map { it.toMutableList() }.toMutableList()
+                        val mapCopy = input.toCharMap().map { it.toMutableList() }.toMutableList()
                         mapCopy.setAt(y to x, 'O')
                         if (mapCopy.containsLoop()) {
                             count++

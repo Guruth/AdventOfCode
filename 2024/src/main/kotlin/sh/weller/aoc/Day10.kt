@@ -1,13 +1,13 @@
 package sh.weller.aoc
 
-import sh.weller.aoc.util.to2DList
+import sh.weller.aoc.util.toCharMap
 
 object Day10 : SomeDay<Int> {
 
     override val day: Int = 10
 
     override fun partOne(input: List<String>): Int {
-        val map = input.to2DList()
+        val map = input.toCharMap()
 
         var trailHeads = 0
 
@@ -60,7 +60,7 @@ object Day10 : SomeDay<Int> {
         }
 
     override fun partTwo(input: List<String>): Int {
-        val map = input.to2DList()
+        val map = input.toCharMap()
 
         var trailHeads = 0
 

@@ -1,28 +1,8 @@
 package sh.weller.aoc.util
 
-typealias CharMap = MutableList<MutableList<Char>>
-
-fun CharMap.getNeighbors(y: Int, x: Int): List<Char?> {
-    val up = this.getOrNull(y - 1)?.getOrNull(x)
-    val right = this.getOrNull(y)?.getOrNull(x + 1)
-    val down = this.getOrNull(y + 1)?.getOrNull(x)
-    val left = this.getOrNull(y)?.getOrNull(x - 1)
-
-    return listOf(up, right, down, left)
-}
-
-fun List<String>.to2DList(): CharMap =
-    map { it.toCharArray().toMutableList() }.toMutableList()
-
 fun List<Number>.product(): Long =
     this.map { it.toLong() }
         .reduce { i, j -> i * j }
-
-fun List<List<*>>.print() {
-    for (row in this) {
-        println(row.joinToString(""))
-    }
-}
 
 fun <T> copy(input: List<T>): List<T> = input.toList()
 

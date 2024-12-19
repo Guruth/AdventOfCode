@@ -1,13 +1,7 @@
 package sh.weller.aoc
 
-import sh.weller.aoc.util.to2DList
-
-typealias Coordinate = Pair<Int, Int>
-
-private val Coordinate.y
-    get() = first
-private val Coordinate.x
-    get() = second
+import sh.weller.aoc.util.Coordinate
+import sh.weller.aoc.util.toCharMap
 
 val antennaChars = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
@@ -16,7 +10,7 @@ object Day08 : SomeDay<Long> {
     override val day: Int = 8
 
     override fun partOne(input: List<String>): Long {
-        val map = input.to2DList()
+        val map = input.toCharMap()
         val antennas = map.getAntennaMap()
 
         for ((_, coordinates) in antennas) {
@@ -62,7 +56,7 @@ object Day08 : SomeDay<Long> {
     }
 
     override fun partTwo(input: List<String>): Long {
-        val map = input.to2DList()
+        val map = input.toCharMap()
         val antennas = map.getAntennaMap()
 
         for ((_, coordinates) in antennas) {

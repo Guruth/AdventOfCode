@@ -1,7 +1,6 @@
 package sh.weller.aoc
 
-import sh.weller.aoc.util.print
-import sh.weller.aoc.util.to2DList
+import sh.weller.aoc.util.*
 
 object Day15 : SomeDay<Int> {
 
@@ -39,7 +38,7 @@ object Day15 : SomeDay<Int> {
     private fun List<String>.toMap(): MutableList<MutableList<Char>> =
         this.drop(1).dropLast(1)
             .map { it.substring(1, it.length - 1) }
-            .to2DList()
+            .toCharMap()
 
     private fun MutableList<MutableList<Char>>.getRobotPosition(): Pair<Int, Int> {
         forEachIndexed { y, row ->
@@ -149,7 +148,7 @@ object Day15 : SomeDay<Int> {
     }
 
     override fun partTwo(input: List<String>): Int {
-        val map = input.take(input.indexOf("")).to2DList().widen()
+        val map = input.take(input.indexOf("")).toCharMap().widen()
         val movementAttempts = input.takeLast(input.size - input.indexOf("")).flatMap { it.toCharArray().toList() }
             .map {
                 when (it) {
@@ -290,11 +289,6 @@ object Day15 : SomeDay<Int> {
     enum class Direction {
         UP, RIGHT, DOWN, LEFT
     }
-
-    val Coordinate.y
-        get() = first
-    val Coordinate.x
-        get() = second
 
     private fun Coordinate.move(direction: Direction): Coordinate =
         when (direction) {

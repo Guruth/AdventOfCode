@@ -1,8 +1,7 @@
 package sh.weller.aoc
 
-import sh.weller.aoc.Day12.getSides
 import sh.weller.aoc.util.CharMap
-import sh.weller.aoc.util.to2DList
+import sh.weller.aoc.util.toCharMap
 
 typealias GardenMap = MutableList<MutableList<Pair<Boolean, Char>>>
 
@@ -11,7 +10,7 @@ object Day12 : SomeDay<Int> {
     override val day: Int = 12
 
     override fun partOne(input: List<String>): Int {
-        return input.to2DList()
+        return input.toCharMap()
             .toGardenMap()
             .getClusters()
             .sumOf { spots ->
@@ -77,7 +76,7 @@ object Day12 : SomeDay<Int> {
     }
 
     override fun partTwo(input: List<String>): Int {
-        return input.to2DList()
+        return input.toCharMap()
             .toGardenMap()
             .getClusters()
             .sumOf { spots ->

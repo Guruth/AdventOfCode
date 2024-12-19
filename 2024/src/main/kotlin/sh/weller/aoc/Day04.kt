@@ -1,7 +1,7 @@
 package sh.weller.aoc
 
 import sh.weller.aoc.util.rotateRight
-import sh.weller.aoc.util.to2DList
+import sh.weller.aoc.util.toCharMap
 
 object Day04 : SomeDay<Int> {
 
@@ -9,7 +9,7 @@ object Day04 : SomeDay<Int> {
 
 
     override fun partOne(input: List<String>): Int {
-        val grid = input.to2DList()
+        val grid = input.toCharMap()
 
         return grid.countHorizontal() +
                 grid.countHorizontalReversed() +
@@ -76,7 +76,7 @@ object Day04 : SomeDay<Int> {
     //    .A.
     //    M.S
     override fun partTwo(input: List<String>): Int {
-        val grid = input.to2DList()
+        val grid = input.toCharMap()
 
         return grid.countXMAS() +
                 grid.rotateRight().countXMAS() +

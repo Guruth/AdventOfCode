@@ -34,7 +34,6 @@ object Day14 : SomeDay<Int> {
                 }
             }
         }
-        foo.print()
     }
 
     private fun toRobot(line: String): Robot {

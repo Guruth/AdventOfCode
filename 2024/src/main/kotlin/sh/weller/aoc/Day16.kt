@@ -1,21 +1,26 @@
 package sh.weller.aoc
 
-import sh.weller.aoc.Day15.x
-import sh.weller.aoc.Day15.y
-import sh.weller.aoc.util.CharMap
-import sh.weller.aoc.util.copy
-import sh.weller.aoc.util.to2DList
+import sh.weller.aoc.util.*
 
 object Day16 : SomeDay<Int> {
 
     override val day: Int = 16
 
     override fun partOne(input: List<String>): Int {
-        val paths = input.to2DList()
+        val paths = input.toCharMap()
             .findPaths()
 
         return paths.minOf { it.score }
     }
+
+
+    override fun partTwo(input: List<String>): Int {
+        val paths = input.toCharMap()
+            .findPaths()
+
+        return paths.groupBy { it.score }.minBy { it.key }.value.flatMap { it.visitedPoints }.toSet().count() + 1
+    }
+
 
     private fun CharMap.findPaths(): List<Path> {
         val startCoordinate = findPoint { it == 'S' }
@@ -94,60 +99,59 @@ object Day16 : SomeDay<Int> {
         throw IllegalArgumentException("No match found")
     }
 
-    override fun partTwo(input: List<String>): Int {
-        val paths = input.to2DList()
-            .findPaths()
-
-        return paths.groupBy { it.score }.minBy { it.key }.value.flatMap { it.visitedPoints }.toSet().count() +1
-    }
-
-}
-
-private fun CharMap.getNextTile(coordinate: Coordinate, direction: Direction) =
-    when (direction) {
-        Direction.North -> getTile(coordinate.y - 1 to coordinate.x)
-        Direction.East -> getTile(coordinate.y to coordinate.x + 1)
-        Direction.South -> getTile(coordinate.y + 1 to coordinate.x)
-        Direction.West -> getTile(coordinate.y to coordinate.x - 1)
-    }
-
-private fun CharMap.getTile(coordinate: Coordinate): Tile =
-    when (this[coordinate.y][coordinate.x]) {
-        '.', 'S', 'E' -> Tile.Floor(coordinate)
-        '#' -> Tile.Wall(coordinate)
-        else -> throw IllegalArgumentException("Unknown Tile")
-    }
-
-private sealed interface Tile {
-    val coordinate: Coordinate
-
-    data class Floor(override val coordinate: Coordinate) : Tile
-    data class Wall(override val coordinate: Coordinate) : Tile
-}
-
-private data class Path(
-    val startingPoint: Coordinate,
-    val visitedPoints: MutableList<Coordinate> = mutableListOf(),
-    val direction: Direction = Direction.East,
-    var score: Int = 0
-)
-
-private enum class Direction {
-    North, East, South, West;
-
-    fun rotateRight(): Direction =
-        when (this) {
-            North -> East
-            East -> South
-            South -> West
-            West -> North
+    private fun CharMap.getNextTile(coordinate: Coordinate, direction: Direction) =
+        when (direction) {
+            Direction.North -> getTile(coordinate.y - 1 to coordinate.x)
+            Direction.East -> getTile(coordinate.y to coordinate.x + 1)
+            Direction.South -> getTile(coordinate.y + 1 to coordinate.x)
+            Direction.West -> getTile(coordinate.y to coordinate.x - 1)
         }
 
-    fun rotateLeft(): Direction =
-        when (this) {
-            North -> West
-            East -> North
-            South -> East
-            West -> South
+    private fun CharMap.getTile(coordinate: Coordinate): Tile {
+        if (coordinate.y < 0 || coordinate.y >= size || coordinate.x < 0 || coordinate.x >= first().size) {
+            return Tile.Wall(coordinate)
         }
+
+        return when (this[coordinate.y][coordinate.x]) {
+            '.', 'S', 'E' -> Tile.Floor(coordinate)
+            '#' -> Tile.Wall(coordinate)
+            else -> throw IllegalArgumentException("Unknown Tile")
+        }
+    }
+
+    private sealed interface Tile {
+        val coordinate: Coordinate
+
+        data class Floor(override val coordinate: Coordinate) : Tile
+        data class Wall(override val coordinate: Coordinate) : Tile
+    }
+
+    private data class Path(
+        val startingPoint: Coordinate,
+        val visitedPoints: MutableList<Coordinate> = mutableListOf(),
+        val direction: Direction = Direction.East,
+        var score: Int = 0
+    )
+
+    private enum class Direction {
+        North, East, South, West;
+
+        fun rotateRight(): Direction =
+            when (this) {
+                North -> East
+                East -> South
+                South -> West
+                West -> North
+            }
+
+        fun rotateLeft(): Direction =
+            when (this) {
+                North -> West
+                East -> North
+                South -> East
+                West -> South
+            }
+    }
+
 }
+
