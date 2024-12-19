@@ -291,9 +291,9 @@ object Day15 : SomeDay<Int> {
         UP, RIGHT, DOWN, LEFT
     }
 
-    private val Coordinate.y
+    val Coordinate.y
         get() = first
-    private val Coordinate.x
+    val Coordinate.x
         get() = second
 
     private fun Coordinate.move(direction: Direction): Coordinate =

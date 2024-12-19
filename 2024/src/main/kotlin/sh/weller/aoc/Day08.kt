@@ -4,6 +4,11 @@ import sh.weller.aoc.util.to2DList
 
 typealias Coordinate = Pair<Int, Int>
 
+private val Coordinate.y
+    get() = first
+private val Coordinate.x
+    get() = second
+
 val antennaChars = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
 object Day08 : SomeDay<Long> {
